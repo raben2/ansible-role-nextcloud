@@ -1,0 +1,25 @@
+nextcloud_src_path: /usr/src
+nextcloud_tmp_path: /tmp/nc
+# This is a fallback if you do not want to include
+# raben2.ansible-role-nginx
+nextcloud_www_user: www-data
+nextcloud_www_group: www-data
+nextcloud_php_dependencies: 
+    - gd
+    - dom
+    - ctype
+    - iconv
+    - json
+    - xml
+    - mbstring
+    - posix
+    - simplexml
+    - xmlwriter
+    - zip
+    - curl
+    - pgsql
+    - intl
+    - imagick
+    - imap
+    - smb
+    - ftp

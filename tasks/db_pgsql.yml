@@ -1,0 +1,27 @@
+- name: ensure database
+  postgresql_db:
+    name:  "{{ nextcloud_database_schema }}"
+    encoding: UTF-8
+    login_host: "{{ nextcloud_database_host }}"
+    login_user: "{{ nextcloud_database_admin }}"
+  become_user: "{{ nextcloud_database_admin }}"
+  become_method: sudo
+
+- name: ensure schema
+  postgresql_user:
+    name: "{{ nextcloud_database_schema }}"
+    login_host: "{{ nextcloud_database_host }}"
+    login_user: "{{ nextcloud_database_admin }}"
+  become_user: "{{ nextcloud_database_admin }}"
+  become_method: sudo
+
+- name: ensure database
+  postgresql_user:
+    name: "{{ nextcloud_database_user }}"
+    password: "{{ nextcloud_database_user_password }}"
+    db:  "{{ nextcloud_database_schema }}"
+    login_host: "{{ nextcloud_database_host }}"
+    login_user: "{{ nextcloud_database_admin }}"
+    role_attr_flags: CREATEDB,NOSUPERUSER
+  become_user: "{{ nextcloud_database_admin }}"
+  become_method: sudo

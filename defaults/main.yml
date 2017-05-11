@@ -1,0 +1,112 @@
+nextcloud_version: "11.0.3"
+nextcloud_release: stable
+nextcloud_timezone: "Europe/Berlin"
+nextcloud_dl_url: "https://download.nextcloud.com/server/releases/nextcloud-{{ nextcloud_version }}.tar.bz2"
+nextcloud_sha256: 28d5ee39f31c6be20f037ad2eb300272ad9bb72a7d428eb0152c7a3fde87d545
+# Obtain new versions and sha from https://nextcloud.com/changelog/
+nextcloud_htdocs_root: /var/www/html
+nextcloud_vhost_root: "{{ nextcloud_htdocs_root }}/nextcloud"
+nextcloud_data_dir: "{{ nextcloud_htdocs_root }}/data"
+nextcloud_conf_dir: "{{ nextcloud_vhost_root }}/config"
+nextcloud_app_dir: "{{ nextcloud_vhost_root }}/apps"
+# Your list of trusted domains that users can log into. Specifying trusted
+# domains prevents host header poisoning. Do not remove this, as it performs
+# necessary security checks.
+# You can specify:
+# - the exact hostname of your host or virtual host, e.g. demo.example.org.
+# - the exact hostname with permitted port, e.g. demo.example.org:443.
+#   This disallows all other ports on this host
+# - use * as a wildcard, e.g. ubos-raspberry-pi*.local will allow
+#   ubos-raspberry-pi.local and ubos-raspberry-pi-2.local
+
+nextcloud_trusted_sources:
+   - localhost.localdomain
+nextcloud_crypt_cipher: "AES-256-CFB"
+
+# Identifies the database used with this installation. See also config option
+# ``supportedDatabases``
+# Available:
+# - sqlite (SQLite3) # not tested with this role
+# - mysql (MySQL/MariaDB)  # not tested with this role
+# - pgsql (PostgreSQL)
+# - oci (Oracle)  # not tested with this role
+
+nextcloud_database: pgsql
+nextcloud_database_host: localhost
+nextcloud_database_schema: nextcloud
+# If set to false ansible must be able to connect
+# as user postgres via ssh
+nextcloud_database_login_present: true
+nextcloud_database_user: nextcloud
+nextcloud_database_user_password: chang3m3
+nextcloud_database_prefix: 'prod_'
+nextcloud_database_admin: postgres
+## change the ui defaults
+
+# This sets the default language on your Nextcloud server, using ISO_639-1
+# language codes such as ``en`` for English, ``de`` for German, and ``fr`` for
+# French. It overrides automatic language detection on public pages like login
+# or shared items. User's language preferences configured under "personal ->
+# language" override this setting after they have logged in.
+nextcloud_default_language: en
+nextcloud_default_app: files
+nextcloud_help_enabled: true
+nextcloud_ava_enabled: true
+nextcloud_user_can_change_name: true
+nextcloud_session_cookie_valid: "60*60*24*15" # 15 days in seconds
+nextcloud_inactive_session_valid: "60 * 60 * 24"
+
+# The ``user_backends`` app (which needs to be enabled first) allows you to
+# configure alternate authentication backends. Supported backends are:
+# IMAP (OC_User_IMAP), SMB (OC_User_SMB), and FTP (OC_User_FTP).
+# see https://docs.nextcloud.com/server/11/admin_manual/configuration_user/user_auth_ftp_smb_imap.html?highlight=user_backends for further information
+
+nextcloud_auth_enabled: False
+nextcloud_user_backends:
+  - name: OC_USER_IMAP
+    active: False
+    address: imap.gmail.com:993/imap/ssl
+  - name: OC_User_SMB
+    active: False
+    address: localhost
+  - name: OC_User_FTP
+    active: True
+    address: localhost
+
+nextcloud_mail_notifications: false # not implemented yet
+nextcloud_behind_proxy: False # configuration parameters not implemented yet
+# Available values:
+#
+# * ``auto``      
+#     default setting. keeps files and folders in the trash bin for 30 days 
+#     and automatically deletes anytime after that if space is needed (note: 
+#     files may not be deleted if space is not needed).
+# * ``D, auto``   
+#     keeps files and folders in the trash bin for D+ days, delete anytime if 
+#     space needed (note: files may not be deleted if space is not needed)
+# * ``auto, D``   
+#     delete all files in the trash bin that are older than D days   
+#     automatically, delete other files anytime if space needed
+# * ``D1, D2``    
+#     keep files and folders in the trash bin for at least D1 days and 
+#     delete when exceeds D2 days
+# * ``disabled``  
+#     trash bin auto clean disabled, files and folders will be kept forever
+#
+nextcloud_trash_retention: auto
+nextcloud_version_retention: auto
+
+# By default the Nextcloud logs are sent to the ``nextcloud.log`` file in the
+# default Nextcloud data directory.
+# If syslogging is desired, set this parameter to ``syslog``.
+# Setting this parameter to ``errorlog`` will use the PHP error_log function
+# for logging.
+nextcloud_log_target: syslog
+
+nextcloud_cleanup_files:
+   - "{{ nextcloud_conf_dir }}/config.sample.php"
+   - "{{ download.dest }}"
+
+### TODO
+nextcloud_ssl: false # Not implemented yet
+nextcloud_memcache: false

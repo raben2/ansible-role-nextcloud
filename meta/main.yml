@@ -1,0 +1,26 @@
+---
+dependencies:
+    - raben2.postgres
+    - raben2.nginx
+
+galaxy_info:
+  author: Georg Rabenstein @raben2
+  description: Install nextcloud with postgresql backend
+  license: LGPL
+  min_ansible_version: 2.1
+  platforms:
+    - name: EL
+      versions:
+      - 6
+      - 7
+    - name: Debian
+      versions:
+      - all
+    - name: Ubuntu
+      versions:
+      - all
+  galaxy_tags:
+    - cloud
+    - storage
+    - owncloud
+    - nextcloud

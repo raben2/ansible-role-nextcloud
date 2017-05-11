@@ -1,0 +1,46 @@
+- name: ensure directories
+  file:
+    state: directory
+    dest: "{{ item }}"
+    owner: "{{ nextcloud_www_user }}"
+    group: "{{ nextcloud_www_group }}"
+    mode: 0755
+  with_items:
+    - "{{ nextcloud_htdocs_root }}"
+    - "{{ nextcloud_tmp_path }}" 
+    - "{{ nextcloud_app_dir }}"
+
+- name: ensure upload directory
+  file:
+    state: directory
+    dest: "{{ nextcloud_data_dir }}"
+    owner: "{{ nextcloud_www_user }}"
+    group: "{{ nextcloud_www_group }}"
+    mode: 0777
+  ignore_errors: True
+
+#- name: download the package
+#  get_url:
+#    url: "{{ nextcloud_dl_url }}"
+#    dest: "{{ nextcloud_src_path }}"
+#    checksum: "sha256:{{ nextcloud_sha256 }}"
+#  register: download#
+
+#- name: unarchive to docroot
+#  unarchive:
+#    src: "{{ download.dest }}"
+#    dest: "{{ nextcloud_htdocs_root }}"
+#    remote_src: True
+#    owner: "{{ nextcloud_www_user }}"
+#    group: "{{ nextcloud_www_group }}"
+#    mode: 0755
+
+- name: create nextcloud config file
+  template:
+    dest: "{{ nextcloud_conf_dir }}/config.php"
+    src: config.php.j2
+    owner: "{{ nextcloud_www_user }}"
+    group: "{{ nextcloud_www_group }}"
+    mode: 0755
+  notify:
+    - restart nginx

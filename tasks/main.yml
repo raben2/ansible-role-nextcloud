@@ -1,0 +1,16 @@
+- name: include os specific vars
+  include_vars: "{{ ansible_os_family }}.yml"
+
+- name: include nextcloud setup
+  include: setup.yml
+
+- name: create database and user
+  include: "db_{{ nextcloud_database }}.yml"
+
+- name: cleanup
+  file:
+    state: absent
+    dest: "{{ item }}"
+  with_items:
+    - "{{ nextcloud_cleanup_files }}"
+  ignore_errors: True
