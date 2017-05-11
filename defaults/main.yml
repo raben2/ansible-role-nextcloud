@@ -31,7 +31,7 @@ nextcloud_crypt_cipher: "AES-256-CFB"
 # - pgsql (PostgreSQL)
 # - oci (Oracle)  # not tested with this role
 
-nextcloud_database: pgsql
+nextcloud_database: pgsql #mariadb not implemented yet
 nextcloud_database_host: localhost
 nextcloud_database_schema: nextcloud
 # If set to false ansible must be able to connect

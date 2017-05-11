@@ -141,4 +141,4 @@ LGPL
 
 ## Author Information
 
-This role was created in 2017 by [Georg Rabenstein](https://github.com/raben
+This role was created in 2017 by [Georg Rabenstein](https://github.com/raben2)
