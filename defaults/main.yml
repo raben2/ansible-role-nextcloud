@@ -43,6 +43,25 @@ nextcloud_database_prefix: 'prod_'
 nextcloud_database_admin: postgres
 ## change the ui defaults
 
+# Configure caching
+# Available cache backends:
+#
+# APC        Alternative PHP Cache backend
+# APCu       APC user backend
+# ArrayCache In-memory array-based backend (not recommended)
+# Memcached  Memcached backend
+# Redis      Redis backend
+# XCache    XCache backend
+nextcloud_memcache: false
+nextcloud_cache_type: Redis # Memcached not implemented
+nextcloud_cache_servers: []
+#  - name: redis
+#    host: localhost
+#    port: 6379
+#    timeout: '0.0'
+#    password: ''
+#    dbindex: 0
+
 # This sets the default language on your Nextcloud server, using ISO_639-1
 # language codes such as ``en`` for English, ``de`` for German, and ``fr`` for
 # French. It overrides automatic language detection on public pages like login
@@ -109,4 +128,3 @@ nextcloud_cleanup_files:
 
 ### TODO
 nextcloud_ssl: false # Not implemented yet
-nextcloud_memcache: false

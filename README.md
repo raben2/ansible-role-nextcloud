@@ -127,6 +127,7 @@ nginx_vhosts:
     - hosts: server
       roles:
       	- { role: raben2.postgres }
+        - { role: raben2.redis }
         - { role: raben2.nginx }
         - { role: raben2.nextcloud }
 ```
