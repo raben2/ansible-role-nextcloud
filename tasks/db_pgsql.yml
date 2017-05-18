@@ -25,3 +25,11 @@
     role_attr_flags: CREATEDB,NOSUPERUSER
   become_user: "{{ nextcloud_database_admin }}"
   become_method: sudo
+
+- name: update pg_hba.conf
+  lineinfile: 
+    dest: "/etc/postgres/pg_hba.conf"
+    line: "host   {{ nextcloud_database_schema }} {{ nextcloud_user }} {{ ansible_default_ipv4.address }}/32 trust"
+    insertafter: EOF
+  notify:
+    - restart postgresql
