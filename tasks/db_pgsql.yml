@@ -29,7 +29,7 @@
 - name: update pg_hba.conf
   lineinfile: 
     dest: "/etc/postgres/pg_hba.conf"
-    line: "host   {{ nextcloud_database_schema }} {{ nextcloud_user }} {{ ansible_default_ipv4.address }}/32 trust"
+    line: "host   {{ nextcloud_database_schema }} {{ nextcloud_database_user }} {{ ansible_default_ipv4.address }}/32 trust"
     insertafter: EOF
   notify:
     - restart postgresql

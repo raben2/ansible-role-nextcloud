@@ -19,21 +19,21 @@
     mode: 0777
   ignore_errors: True
 
-#- name: download the package
-#  get_url:
-#    url: "{{ nextcloud_dl_url }}"
-#    dest: "{{ nextcloud_src_path }}"
-#    checksum: "sha256:{{ nextcloud_sha256 }}"
-#  register: download#
-
-#- name: unarchive to docroot
-#  unarchive:
-#    src: "{{ download.dest }}"
-#    dest: "{{ nextcloud_htdocs_root }}"
-#    remote_src: True
-#    owner: "{{ nextcloud_www_user }}"
-#    group: "{{ nextcloud_www_group }}"
-#    mode: 0755
+- name: download the package
+  get_url:
+    url: "{{ nextcloud_dl_url }}"
+    dest: "{{ nextcloud_src_path }}"
+    checksum: "sha256:{{ nextcloud_sha256 }}"
+  register: download
+  
+- name: unarchive to docroot
+  unarchive:
+    src: "{{ download.dest }}"
+    dest: "{{ nextcloud_htdocs_root }}"
+    remote_src: True
+    owner: "{{ nextcloud_www_user }}"
+    group: "{{ nextcloud_www_group }}"
+    mode: 0755
 
 - name: create nextcloud config file
   template:
