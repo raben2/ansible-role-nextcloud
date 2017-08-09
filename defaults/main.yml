@@ -1,4 +1,4 @@
-nextcloud_version: "12.0.0"
+nextcloud_version: "12.0.1"
 nextcloud_release: stable
 nextcloud_timezone: "Europe/Berlin"
 nextcloud_dl_url: "https://download.nextcloud.com/server/releases/nextcloud-{{ nextcloud_version }}.tar.bz2"

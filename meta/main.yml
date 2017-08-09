@@ -1,7 +1,7 @@
 ---
-dependencies:
-    - raben2.postgres
-    - raben2.nginx
+#dependencies:
+#    - raben2.postgres
+#    - raben2.nginx
 
 galaxy_info:
   author: Georg Rabenstein @raben2
