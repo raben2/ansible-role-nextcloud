@@ -2,7 +2,7 @@ nextcloud_version: "12.0.1"
 nextcloud_release: stable
 nextcloud_timezone: "Europe/Berlin"
 nextcloud_dl_url: "https://download.nextcloud.com/server/releases/nextcloud-{{ nextcloud_version }}.tar.bz2"
-nextcloud_sha256: 1b9d9cf05e657cd564a552b418fbf42d669ca51e0fd1f1f118fe44cbf93a243f
+nextcloud_sha256: 5288f645348eddc1a7768825678bd19f110cec585a16f98b52c64389358c74bc
 # Obtain new versions and sha from https://nextcloud.com/changelog/
 nextcloud_htdocs_root: /var/www/html
 nextcloud_vhost_root: "{{ nextcloud_htdocs_root }}/nextcloud"
